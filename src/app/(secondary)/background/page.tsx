@@ -94,6 +94,59 @@ const certifications = [
 	},
 ];
 
+const backgroundSections = {
+	projects: {
+		description: "Robotics and software projects",
+		count: projects.length,
+	},
+	internships: {
+		description: "Research and software engineering experience",
+		count: internships.length,
+	},
+	publications: {
+		description: "Peer-reviewed research",
+		count: researchPublications.length,
+	},
+	certifications: {
+		description: "Robotics, mathematics, and computer science",
+		count: certifications.length,
+	},
+};
+
+function BackgroundSummary({
+	title,
+	description,
+	count,
+}: {
+	title: string;
+	description: string;
+	count: number;
+}) {
+	return (
+		<summary className="background-summary">
+			<div className="background-summary-copy">
+				<span className="background-summary-title">{title}</span>
+				<span className="background-summary-description">
+					{description}
+				</span>
+			</div>
+
+			<div className="background-summary-meta">
+				<span className="background-summary-count">
+					{count.toString().padStart(2, "0")}
+				</span>
+
+				<span
+					className="background-summary-icon"
+					aria-hidden="true"
+				>
+					+
+				</span>
+			</div>
+		</summary>
+	);
+}
+
 function PublicationRow({
 	publication,
 	index,
@@ -188,20 +241,22 @@ export default function BackgroundPage() {
 			<div className="research-container">
 				<header className="work-intro work-page-fade">
 					<h1>Background</h1>
+					<p>
+						A closer look at the projects, research, and experience
+						that shaped my work.
+					</p>
 				</header>
 
 				{/* Projects */}
 				<section className="background-section">
 					<details className="background-details" open>
-						<summary className="background-summary">
-							<span>Projects</span>
-							<span
-								className="background-summary-icon"
-								aria-hidden="true"
-							>
-								+
-							</span>
-						</summary>
+						<BackgroundSummary
+							title="Projects"
+							description={
+								backgroundSections.projects.description
+							}
+							count={backgroundSections.projects.count}
+						/>
 
 						<div className="background-content">
 							{projects.map((project) => (
@@ -209,13 +264,15 @@ export default function BackgroundPage() {
 									key={project.title}
 									className="background-item"
 								>
-									<h3 className="background-item-title">
-										{project.title}
-									</h3>
+									<div className="background-item-heading">
+										<h3 className="background-item-title">
+											{project.title}
+										</h3>
 
-									<p className="background-item-meta">
-										{project.date}
-									</p>
+										<p className="background-item-date">
+											{project.date}
+										</p>
+									</div>
 
 									<p className="background-item-description">
 										{project.description}
@@ -229,15 +286,13 @@ export default function BackgroundPage() {
 				{/* Internships */}
 				<section className="background-section">
 					<details className="background-details">
-						<summary className="background-summary">
-							<span>Internships</span>
-							<span
-								className="background-summary-icon"
-								aria-hidden="true"
-							>
-								+
-							</span>
-						</summary>
+						<BackgroundSummary
+							title="Internships"
+							description={
+								backgroundSections.internships.description
+							}
+							count={backgroundSections.internships.count}
+						/>
 
 						<div className="background-content">
 							{internships.map((internship) => (
@@ -245,13 +300,21 @@ export default function BackgroundPage() {
 									key={internship.title}
 									className="background-item"
 								>
-									<h3 className="background-item-title">
-										{internship.title}
-									</h3>
+									<div className="background-item-heading">
+										<div>
+											<h3 className="background-item-title">
+												{internship.title}
+											</h3>
 
-									<p className="background-item-meta">
-										{internship.role} · {internship.date}
-									</p>
+											<p className="background-item-role">
+												{internship.role}
+											</p>
+										</div>
+
+										<p className="background-item-date">
+											{internship.date}
+										</p>
+									</div>
 
 									<p className="background-item-description">
 										{internship.description}
@@ -265,15 +328,13 @@ export default function BackgroundPage() {
 				{/* Publications */}
 				<section className="background-section">
 					<details className="background-details">
-						<summary className="background-summary">
-							<span>Publications</span>
-							<span
-								className="background-summary-icon"
-								aria-hidden="true"
-							>
-								+
-							</span>
-						</summary>
+						<BackgroundSummary
+							title="Publications"
+							description={
+								backgroundSections.publications.description
+							}
+							count={backgroundSections.publications.count}
+						/>
 
 						<div className="background-content">
 							<ol className="research-publications">
@@ -294,15 +355,13 @@ export default function BackgroundPage() {
 				{/* Certifications */}
 				<section className="background-section">
 					<details className="background-details">
-						<summary className="background-summary">
-							<span>Certifications</span>
-							<span
-								className="background-summary-icon"
-								aria-hidden="true"
-							>
-								+
-							</span>
-						</summary>
+						<BackgroundSummary
+							title="Certifications"
+							description={
+								backgroundSections.certifications.description
+							}
+							count={backgroundSections.certifications.count}
+						/>
 
 						<div className="background-content">
 							{certifications.map((certification) => (
@@ -310,13 +369,18 @@ export default function BackgroundPage() {
 									key={certification.title}
 									className="background-item"
 								>
-									<h3 className="background-item-title">
-										{certification.title}
-									</h3>
+									<div className="background-item-heading">
+										<h3 className="background-item-title">
+											{certification.title}
+										</h3>
 
-									<p className="background-item-meta">
-										{certification.issuer} ·{" "}
-										{certification.date}
+										<p className="background-item-date">
+											{certification.date}
+										</p>
+									</div>
+
+									<p className="background-item-role">
+										{certification.issuer}
 									</p>
 								</article>
 							))}

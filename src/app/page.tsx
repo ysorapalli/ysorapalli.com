@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import HomePageClient from "@/components/HomePageClient";
-import { absoluteUrl, personReference, site } from "@/data/site";
+import { site, personReference } from "@/data/site";
 
 export const metadata: Metadata = {
 	alternates: {
@@ -27,13 +27,8 @@ export default function HomePage() {
 							familyName: "Sorapalli",
 							url: `${site.url}/`,
 							description: site.description,
-							image: {
-								"@type": "ImageObject",
-								contentUrl: absoluteUrl(site.image),
-								width: 900,
-								height: 900,
-							},
-							jobTitle: "M.S. Student in Robotic Systems Development",
+							jobTitle:
+								"M.S. Student in Robotic Systems Development",
 							affiliation: {
 								"@type": "CollegeOrUniversity",
 								name: "Carnegie Mellon University",

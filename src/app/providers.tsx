@@ -9,7 +9,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 			defaultTheme="light"
 			disableTransitionOnChange
 			enableSystem={false}
-			storageKey="ethan-theme"
+			storageKey="yashasvi-theme"
 		>
 			{children}
 		</ThemeProvider>

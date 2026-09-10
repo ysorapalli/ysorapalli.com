@@ -10,13 +10,16 @@ const getServerHydrationSnapshot = () => false;
 
 export default function ThemeToggle() {
 	const { resolvedTheme, setTheme } = useTheme();
+
 	const mounted = useSyncExternalStore(
 		subscribeToHydration,
 		getClientHydrationSnapshot,
 		getServerHydrationSnapshot,
 	);
-	const isNight = resolvedTheme === "dark";
-	const targetTheme = isNight ? "light" : "dark";
+
+	const isDark = resolvedTheme === "dark";
+	const targetTheme = isDark ? "light" : "dark";
+
 	const accessibleLabel = mounted
 		? `Switch to ${targetTheme} theme`
 		: "Toggle color theme";
@@ -29,22 +32,25 @@ export default function ThemeToggle() {
 			aria-label={accessibleLabel}
 			title={accessibleLabel}
 		>
-			<Image
-				src="/images/theme/sun.svg"
-				alt=""
-				width={21}
-				height={21}
-				priority
-				className="portfolio-theme-icon-day"
-			/>
-			<Image
-				src="/images/theme/moon.svg"
-				alt=""
-				width={24}
-				height={25}
-				priority
-				className="portfolio-theme-icon-night"
-			/>
+			{isDark ? (
+				<Image
+					src="/images/theme/sun.svg"
+					alt=""
+					width={21}
+					height={21}
+					priority
+					className="portfolio-theme-icon portfolio-theme-icon-sun"
+				/>
+			) : (
+				<Image
+					src="/images/theme/moon.svg"
+					alt=""
+					width={21}
+					height={21}
+					priority
+					className="portfolio-theme-icon portfolio-theme-icon-moon"
+				/>
+			)}
 		</button>
 	);
 }

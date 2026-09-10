@@ -4,12 +4,10 @@ import Image from "next/image";
 import { useEffect, useState, type ReactNode } from "react";
 
 import Navbar from "@/components/Navbar";
-import PublicationAuthors from "@/components/PublicationAuthors";
-
 import {
 	researchPublications,
 	selectedProjects,
-	type ResearchPublication,
+	type SelectedProject,
 } from "@/data/research";
 
 import { FiFileText, FiMapPin } from "react-icons/fi";
@@ -162,69 +160,72 @@ function ExperienceRow({
 	);
 }
 
-function SelectedPublicationRow({
-	publication,
+function SelectedProjectRow({
+	project,
 	index,
 }: {
-	publication: ResearchPublication;
+	project: SelectedProject;
 	index: number;
 }) {
 	return (
 		<article
-			className="portfolio-work-item portfolio-fade"
+			className="portfolio-project-item portfolio-fade"
 			style={{ animationDelay: `${340 + index * 45}ms` }}
 		>
-			<a
-				href={publication.href}
-				target="_blank"
-				rel="noopener noreferrer"
-				className="portfolio-work-media"
-				aria-label={`View ${publication.title}`}
-			>
-				<Image
-					src={publication.image}
-					alt={publication.imageAlt}
-					width={800}
-					height={500}
-					quality={90}
-					loading={index === 0 ? "eager" : "lazy"}
-					sizes="(max-width: 599px) calc(100vw - 48px), 196px"
-					className="portfolio-work-image"
-				/>
-			</a>
+			<div className="portfolio-project-heading">
+				<h3 className="portfolio-project-title">{project.title}</h3>
 
-			<div className="portfolio-work-copy">
-				<h3 className="portfolio-work-title">
-					<TextLink href={publication.href}>
-						{publication.title}
-					</TextLink>
-				</h3>
+				<span className="portfolio-project-status">
+					{project.status}
+				</span>
+			</div>
 
-				<PublicationAuthors
-					authors={publication.authors}
-					className="portfolio-work-authors"
-				/>
+			<p className="portfolio-project-meta">
+				{project.organization}, {project.date}
+			</p>
 
-				<p className="portfolio-work-venue">
-					{publication.venue}, {publication.date}
-				</p>
+			<p className="portfolio-project-description">
+				{project.description}
+			</p>
 
+			<p className="portfolio-project-contribution">
+				<strong>Focus:</strong> {project.contribution}
+			</p>
+
+			{project.focusAreas.length > 0 ? (
+				<div className="portfolio-project-focus">
+					<span className="portfolio-project-focus-label">
+						Areas
+					</span>
+
+					{project.focusAreas.map((area) => (
+						<span
+							key={area}
+							className="portfolio-project-focus-item"
+						>
+							{area}
+						</span>
+					))}
+				</div>
+			) : null}
+
+			{project.resources.length > 0 ? (
 				<nav
-					className="portfolio-work-resources"
-					aria-label={`${publication.shortTitle} resources`}
+					className="portfolio-project-resources"
+					aria-label={`${project.shortTitle} resources`}
 				>
-					{publication.resources.map(
+					{project.resources.map(
 						(resource, resourceIndex) => (
 							<span
 								key={resource.label}
-								className="portfolio-work-resource-item"
+								className="portfolio-project-resource"
 							>
 								<TextLink href={resource.href}>
 									{resource.label}
 								</TextLink>
 
 								{resourceIndex <
-								publication.resources.length - 1 ? (
+								project.resources.length - 1 ? (
 									<span
 										className="portfolio-work-resource-separator"
 										aria-hidden="true"
@@ -236,11 +237,7 @@ function SelectedPublicationRow({
 						),
 					)}
 				</nav>
-
-				<p className="portfolio-work-description">
-					{publication.description}
-				</p>
-			</div>
+			) : null}
 		</article>
 	);
 }
@@ -323,7 +320,11 @@ export default function HomePageClient() {
 								and autonomy.
 							</p>
 
-							<p className="portfolio-p portfolio-contact-copy">
+							<p className="portfolio-focus">
+								Robotics Software · Perception · Autonomy
+							</p>
+
+							<p className="portfolio-contact-copy">
 								You can reach me at{" "}
 								<span className="portfolio-copy-email">
 									<button
@@ -442,38 +443,17 @@ export default function HomePageClient() {
 							className="portfolio-section-label portfolio-fade"
 							style={{ animationDelay: "300ms" }}
 						>
-							Current projects
+							CMU projects
 						</h2>
 
 						<div className="portfolio-work-list">
-							{selectedProjects.map((publication, index) => (
-								<SelectedPublicationRow
-									key={publication.title}
-									publication={publication}
+							{selectedProjects.map((project, index) => (
+								<SelectedProjectRow
+									key={project.title}
+									project={project}
 									index={index}
 								/>
 							))}
-						</div>
-
-						<div
-							className="portfolio-more-content portfolio-fade"
-							style={{ animationDelay: "500ms" }}
-						>
-							<a
-								href="/background/"
-								className="portfolio-previous-work-link"
-							>
-								<span>
-									<strong>Background</strong>
-								</span>
-
-								<span
-									className="portfolio-previous-work-arrow"
-									aria-hidden="true"
-								>
-									→
-								</span>
-							</a>
 						</div>
 					</section>
 				</div>

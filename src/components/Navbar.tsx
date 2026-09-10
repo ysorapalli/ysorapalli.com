@@ -2,22 +2,52 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FiHome } from "react-icons/fi";
 
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
 	const pathname = usePathname();
+	const [hasScrolled, setHasScrolled] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			setHasScrolled(window.scrollY > 40);
+		};
+
+		handleScroll();
+		window.addEventListener("scroll", handleScroll, { passive: true });
+
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
 
 	const navItems = [
 		{ label: "Home", href: "/" },
 		{ label: "Background", href: "/background/" },
 	];
 
+	const isHome = pathname === "/";
+	const showName = !isHome || hasScrolled;
+
 	return (
 		<header className="secondary-header work-page-fade">
 			<div className="secondary-header-inner">
-				<Link href="/" className="secondary-brand portfolio-link">
-					Yashasvi Sorapalli
+				<Link
+					href="/"
+					className="secondary-brand portfolio-link"
+					aria-label="Yashasvi Sorapalli — Home"
+					title="Home"
+				>
+					<FiHome aria-hidden="true" />
+
+					{showName ? (
+						<span className="secondary-brand-name">
+							Yashasvi Sorapalli
+						</span>
+					) : null}
 				</Link>
 
 				<div className="secondary-header-actions">
@@ -44,15 +74,6 @@ export default function Navbar() {
 								</Link>
 							);
 						})}
-
-						<a
-							href="https://github.com/ysorapalli"
-							target="_blank"
-							rel="noopener noreferrer"
-							className="secondary-nav-link portfolio-link"
-						>
-							GitHub
-						</a>
 					</nav>
 
 					<ThemeToggle />
