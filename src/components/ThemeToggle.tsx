@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { FiMoon, FiSun } from "react-icons/fi";
 import { useSyncExternalStore } from "react";
 import { useTheme } from "next-themes";
 
@@ -17,12 +17,22 @@ export default function ThemeToggle() {
 		getServerHydrationSnapshot,
 	);
 
+	if (!mounted) {
+		return (
+			<button
+				type="button"
+				className="portfolio-theme-toggle"
+				aria-label="Toggle color theme"
+				title="Toggle color theme"
+				disabled
+			/>
+		);
+	}
+
 	const isDark = resolvedTheme === "dark";
 	const targetTheme = isDark ? "light" : "dark";
 
-	const accessibleLabel = mounted
-		? `Switch to ${targetTheme} theme`
-		: "Toggle color theme";
+	const accessibleLabel = `Switch to ${targetTheme} theme`;
 
 	return (
 		<button
@@ -33,22 +43,14 @@ export default function ThemeToggle() {
 			title={accessibleLabel}
 		>
 			{isDark ? (
-				<Image
-					src="/images/theme/sun.svg"
-					alt=""
-					width={21}
-					height={21}
-					priority
-					className="portfolio-theme-icon portfolio-theme-icon-sun"
+				<FiSun
+					aria-hidden="true"
+					className="portfolio-theme-icon"
 				/>
 			) : (
-				<Image
-					src="/images/theme/moon.svg"
-					alt=""
-					width={21}
-					height={21}
-					priority
-					className="portfolio-theme-icon portfolio-theme-icon-moon"
+				<FiMoon
+					aria-hidden="true"
+					className="portfolio-theme-icon"
 				/>
 			)}
 		</button>

@@ -12,6 +12,7 @@ import {
 
 import { FiFileText, FiMapPin } from "react-icons/fi";
 import { FaGithub, FaGoogle, FaLinkedin } from "react-icons/fa";
+import ProjectImage from "@/components/ProjectImage";
 
 const previousExperience = [
 	{
@@ -184,6 +185,11 @@ function SelectedProjectRow({
 				{project.organization}, {project.date}
 			</p>
 
+			<ProjectImage
+				src={project.image}
+				alt={project.imageAlt}
+			/>
+
 			<p className="portfolio-project-description">
 				{project.description}
 			</p>
@@ -225,7 +231,7 @@ function SelectedProjectRow({
 								</TextLink>
 
 								{resourceIndex <
-								project.resources.length - 1 ? (
+									project.resources.length - 1 ? (
 									<span
 										className="portfolio-work-resource-separator"
 										aria-hidden="true"
@@ -306,8 +312,8 @@ export default function HomePageClient() {
 							<p className="portfolio-p">
 								I&apos;m a graduate student in the{" "}
 								<OrganizationLink
-									href="https://www.cmu.edu/"
-									iconSrc="/images/organizations/cmu.svg"
+									href="https://mrsd.ri.cmu.edu/"
+									iconSrc="/images/organizations/cmu-ri.svg"
 								>
 									Master of Science in Robotic
 									Systems Development
@@ -316,8 +322,7 @@ export default function HomePageClient() {
 								I&apos;m interested in building robotic
 								systems that can perceive, understand,
 								and act in the physical world, with a
-								focus on robotics software, perception,
-								and autonomy.
+								focus on closed loop autonomy (robots working without regular inputs froms humans!).
 							</p>
 
 							<p className="portfolio-focus">

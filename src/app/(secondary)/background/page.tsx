@@ -1,15 +1,10 @@
+import ProjectImage from "@/components/ProjectImage";
 import type { Metadata } from "next";
-import Image from "next/image";
 
-import PublicationAuthors from "@/components/PublicationAuthors";
 import { site } from "@/data/site";
-import {
-	researchPublications,
-	type ResearchPublication,
-} from "@/data/research";
 
 const backgroundDescription =
-	"Background of Yashasvi Sorapalli, including projects, internships, publications, and certifications.";
+	"Background of Yashasvi Sorapalli, including projects, research, internships, and certifications.";
 
 export const metadata: Metadata = {
 	title: "Background",
@@ -32,6 +27,54 @@ export const metadata: Metadata = {
 	},
 };
 
+const projects = [
+	{
+		title: "Multi-camera Multi-person Tracking",
+		organization: "Inferigence Quotient",
+		date: "2022 - 2023",
+		description:
+			"A multi-camera, multi-person tracking system that extended a single-camera DeepSORT pipeline to operate across multiple camera views. The system uses a shared MySQL database to communicate tracking information between cameras and support cross-camera identity tracking.",
+		system:
+			"Each camera runs its own DeepSORT tracker while writing relevant tracking information to a shared database. Information from one camera can then be retrieved by another camera to facilitate tracking across camera views. The system was evaluated across both single-camera and multi-camera scenarios, while modifications to the tracking algorithm were used to improve identity preservation during occlusion.",
+		contribution:
+			"My primary contribution was extending the original system from a single-camera setup to a multi-camera architecture and handling the MySQL-based communication between cameras. I also worked with the team on improvements to the tracking algorithm, particularly around maintaining identities when people became temporarily occluded.",
+		focus: [
+			"Computer Vision",
+			"Multi-object Tracking",
+			"DeepSORT",
+			"Cross-camera Tracking",
+			"MySQL",
+		],
+		publication:
+			"Published in the Indonesian Journal of Electrical Engineering and Computer Science in 2025.",
+		link: "https://ijeecs.iaescore.com/index.php/IJEECS/article/view/37989",
+		image: "/images/projects/multicamera-tracking.jpg",
+		imageAlt: "Multi-camera multi-person tracking project",
+	},
+	{
+		title: "Decentralized Document Storage with NFT Authentication",
+		organization: "R.V. College of Engineering",
+		date: "2023",
+		description:
+			"A decentralized document storage and authentication system combining blockchain, IPFS, NFTs, and smart contracts. The system uses decentralized storage for documents while blockchain records provide a verifiable authentication mechanism.",
+		system:
+			"Documents are encrypted and stored using IPFS, while a Solidity smart contract manages the NFT associated with each document. The document's decentralized storage reference is linked through the NFT, creating a persistent blockchain record that can be used to verify the document.",
+		contribution:
+			"This was a collaborative project in which the implementation was largely carried out as a group. My primary involvement was validating the system and its document-authentication workflow, including checking that the complete storage and authentication process worked as intended.",
+		focus: [
+			"Blockchain",
+			"IPFS",
+			"NFT Authentication",
+			"Smart Contracts",
+			"Document Verification",
+		],
+		publication: "Published at IEEE CSITSS in 2024.",
+		link: "https://doi.org/10.1109/CSITSS64042.2024.10816830",
+		image: "/images/projects/blockchain-document-storage.jpg",
+		imageAlt: "Decentralized document storage project",
+	},
+];
+
 const internships = [
 	{
 		title: "Indian Institute of Astrophysics",
@@ -45,7 +88,7 @@ const internships = [
 		role: "Research Intern",
 		date: "Sep 2022 – Sep 2023",
 		description:
-			"Worked on multi-camera, multi-person tracking using computer vision and DeepSORT.",
+			"Worked on multi-camera, multi-person tracking using computer vision and DeepSORT, contributing to the extension from a single-camera system to a multi-camera architecture.",
 	},
 	{
 		title: "Microsoft",
@@ -53,21 +96,6 @@ const internships = [
 		date: "May 2022 – Jun 2022",
 		description:
 			"Explored streaming and recommendation algorithms as part of the Microsoft mentorship program.",
-	},
-];
-
-const projects = [
-	{
-		title: "Multi-camera Multi-person Tracking",
-		date: "2022 – 2023",
-		description:
-			"Developed a multi-camera, multi-person tracking system using DeepSORT and MySQL.",
-	},
-	{
-		title: "Decentralized Document Storage with NFT Authentication",
-		date: "2023",
-		description:
-			"Developed a blockchain-based document verification system using decentralized storage and NFT-based authentication.",
 	},
 ];
 
@@ -94,144 +122,75 @@ const certifications = [
 	},
 ];
 
-const backgroundSections = {
-	projects: {
-		description: "Robotics and software projects",
-		count: projects.length,
-	},
-	internships: {
-		description: "Research and software engineering experience",
-		count: internships.length,
-	},
-	publications: {
-		description: "Peer-reviewed research",
-		count: researchPublications.length,
-	},
-	certifications: {
-		description: "Robotics, mathematics, and computer science",
-		count: certifications.length,
-	},
-};
-
-function BackgroundSummary({
-	title,
-	description,
-	count,
+function ProjectRow({
+	project,
 }: {
-	title: string;
-	description: string;
-	count: number;
+	project: (typeof projects)[number];
 }) {
 	return (
-		<summary className="background-summary">
-			<div className="background-summary-copy">
-				<span className="background-summary-title">{title}</span>
-				<span className="background-summary-description">
-					{description}
-				</span>
-			</div>
+		<details className="background-project-details">
+			<summary className="background-project-summary">
+				<div className="background-project-summary-title">
+					<h3 className="background-project-title">
+						{project.title}
+					</h3>
 
-			<div className="background-summary-meta">
-				<span className="background-summary-count">
-					{count.toString().padStart(2, "0")}
-				</span>
+					<span
+						className="background-project-chevron"
+						aria-hidden="true"
+					/>
+				</div>
 
-				<span
-					className="background-summary-icon"
-					aria-hidden="true"
-				>
-					+
-				</span>
-			</div>
-		</summary>
-	);
-}
-
-function PublicationRow({
-	publication,
-	index,
-}: {
-	publication: ResearchPublication;
-	index: number;
-}) {
-	return (
-		<li className="research-publication work-page-fade">
-			<a
-				href={publication.href}
-				target="_blank"
-				rel="noopener noreferrer"
-				className="research-publication-media"
-				aria-label={`View ${publication.title}`}
-			>
-				<Image
-					src={publication.image}
-					alt={publication.imageAlt}
-					width={800}
-					height={500}
-					quality={90}
-					sizes="(min-width: 760px) 280px, 100vw"
-					loading={index < 2 ? "eager" : "lazy"}
-					className="research-publication-image"
-				/>
-			</a>
-
-			<div className="research-publication-copy">
-				<h3 className="research-publication-title">
-					<a
-						href={publication.href}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="portfolio-link"
-					>
-						{publication.title}
-					</a>
-				</h3>
-
-				<PublicationAuthors
-					authors={publication.authors}
-					className="research-authors"
-				/>
-
-				<p className="research-publication-meta">
-					{publication.venue}, {publication.date}
+				<p className="background-project-organization">
+					{project.organization}
 				</p>
 
-				<nav
-					className="research-resource-links"
-					aria-label={`${publication.shortTitle} resources`}
-				>
-					{publication.resources.map((resource, resourceIndex) => (
-						<span
-							key={resource.label}
-							className="research-resource-item"
+				<p className="background-project-date">{project.date}</p>
+			</summary>
+
+			<div className="background-project-expanded">
+				<div className="background-project-image">
+					<ProjectImage
+						src={project.image}
+						alt={project.imageAlt}
+					/>
+				</div>
+
+				<div className="background-project-body">
+					<section className="background-project-section">
+						<h4>Overview</h4>
+						<p>{project.description}</p>
+					</section>
+
+					<section className="background-project-section">
+						<h4>System</h4>
+						<p>{project.system}</p>
+					</section>
+
+					<section className="background-project-section">
+						<h4>My contribution</h4>
+						<p>{project.contribution}</p>
+					</section>
+
+					<section className="background-project-section">
+						<h4>Focus</h4>
+						<p>{project.focus.join(" · ")}</p>
+					</section>
+
+					<p className="background-project-publication">
+						{project.publication}{" "}
+						<a
+							href={project.link}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="portfolio-link"
 						>
-							<a
-								href={resource.href}
-								target="_blank"
-								rel="noopener noreferrer"
-								className="portfolio-link research-resource-link"
-							>
-								{resource.label}
-							</a>
-
-							{resourceIndex <
-							publication.resources.length - 1 ? (
-								<span
-									className="research-resource-separator"
-									aria-hidden="true"
-								>
-									{" / "}
-								</span>
-							) : null}
-						</span>
-					))}
-				</nav>
-
-				<p className="research-publication-description">
-					{publication.description}
-				</p>
+							View paper
+						</a>
+					</p>
+				</div>
 			</div>
-		</li>
+		</details>
 	);
 }
 
@@ -247,52 +206,28 @@ export default function BackgroundPage() {
 					</p>
 				</header>
 
-				{/* Projects */}
 				<section className="background-section">
 					<details className="background-details" open>
-						<BackgroundSummary
-							title="Projects"
-							description={
-								backgroundSections.projects.description
-							}
-							count={backgroundSections.projects.count}
-						/>
+						<summary className="background-summary">
+							Projects &amp; Research
+						</summary>
 
 						<div className="background-content">
 							{projects.map((project) => (
-								<article
+								<ProjectRow
 									key={project.title}
-									className="background-item"
-								>
-									<div className="background-item-heading">
-										<h3 className="background-item-title">
-											{project.title}
-										</h3>
-
-										<p className="background-item-date">
-											{project.date}
-										</p>
-									</div>
-
-									<p className="background-item-description">
-										{project.description}
-									</p>
-								</article>
+									project={project}
+								/>
 							))}
 						</div>
 					</details>
 				</section>
 
-				{/* Internships */}
 				<section className="background-section">
 					<details className="background-details">
-						<BackgroundSummary
-							title="Internships"
-							description={
-								backgroundSections.internships.description
-							}
-							count={backgroundSections.internships.count}
-						/>
+						<summary className="background-summary">
+							Internships
+						</summary>
 
 						<div className="background-content">
 							{internships.map((internship) => (
@@ -325,63 +260,26 @@ export default function BackgroundPage() {
 					</details>
 				</section>
 
-				{/* Publications */}
 				<section className="background-section">
 					<details className="background-details">
-						<BackgroundSummary
-							title="Publications"
-							description={
-								backgroundSections.publications.description
-							}
-							count={backgroundSections.publications.count}
-						/>
-
-						<div className="background-content">
-							<ol className="research-publications">
-								{researchPublications.map(
-									(publication, index) => (
-										<PublicationRow
-											key={publication.title}
-											publication={publication}
-											index={index}
-										/>
-									),
-								)}
-							</ol>
-						</div>
-					</details>
-				</section>
-
-				{/* Certifications */}
-				<section className="background-section">
-					<details className="background-details">
-						<BackgroundSummary
-							title="Certifications"
-							description={
-								backgroundSections.certifications.description
-							}
-							count={backgroundSections.certifications.count}
-						/>
+						<summary className="background-summary">
+							Certifications
+						</summary>
 
 						<div className="background-content">
 							{certifications.map((certification) => (
 								<article
 									key={certification.title}
-									className="background-item"
+									className="background-certification"
 								>
-									<div className="background-item-heading">
-										<h3 className="background-item-title">
-											{certification.title}
-										</h3>
+									<span className="background-certification-title">
+										{certification.title}
+									</span>
 
-										<p className="background-item-date">
-											{certification.date}
-										</p>
-									</div>
-
-									<p className="background-item-role">
-										{certification.issuer}
-									</p>
+									<span className="background-certification-meta">
+										{certification.issuer} ·{" "}
+										{certification.date}
+									</span>
 								</article>
 							))}
 						</div>
