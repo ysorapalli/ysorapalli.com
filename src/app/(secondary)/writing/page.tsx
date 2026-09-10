@@ -4,8 +4,7 @@ import { absoluteUrl, personReference, site } from "@/data/site";
 import { writingPosts } from "@/data/writing";
 
 const writingDescription =
-	"Technical writing by Ethan Villalovoz on Bayesian optimization, LLM evaluation, robot learning, and AI agents.";
-
+	"Technical writing by Yashasvi Sorapalli on robotics, autonomous systems, and robot perception.";
 export const metadata: Metadata = {
 	title: "Writing",
 	description: writingDescription,
@@ -22,9 +21,8 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary",
-		title: "Writing | Ethan Villalovoz",
+		title: "Writing | Yashasvi Sorapalli",
 		description: writingDescription,
-		creator: "@ethanvillalovoz",
 	},
 };
 

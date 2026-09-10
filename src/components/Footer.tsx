@@ -1,19 +1,17 @@
 const footerLinks = [
-	{ label: "Resume", href: "/data/EthanVillalovoz-Resume.pdf" },
-	{ label: "CV", href: "/data/EthanVillalovoz-CV.pdf" },
-	{ label: "LinkedIn", href: "https://www.linkedin.com/in/ethanvillalovoz/" },
+	{ label: "Resume", href: "/data/YashasviSorapalli-Resume.pdf" },
+	{ label: "LinkedIn", href: "https://www.linkedin.com/in/yashasvi-s/" },
 	{
 		label: "Scholar",
-		href: "https://scholar.google.com/citations?user=CavKFp4AAAAJ&hl=en",
+		href: "https://scholar.google.com/citations?user=qdXeEYEAAAAJ&hl=en",
 	},
-	{ label: "X", href: "https://x.com/ethanvillalovoz" },
 ];
 
 export default function Footer() {
 	return (
 		<footer className="secondary-footer work-page-fade">
 			<div className="secondary-footer-inner">
-				<p>&copy; {new Date().getFullYear()} Ethan Villalovoz</p>
+				<p>&copy; {new Date().getFullYear()} Yashasvi Sorapalli</p>
 				<nav className="secondary-footer-links" aria-label="Additional links">
 					{footerLinks.map((link) => (
 						<a

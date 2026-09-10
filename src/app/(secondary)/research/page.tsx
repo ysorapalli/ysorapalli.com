@@ -4,12 +4,11 @@ import PublicationAuthors from "@/components/PublicationAuthors";
 import { absoluteUrl, personReference, site } from "@/data/site";
 import {
 	researchPublications,
-	teachingExperiences,
 	type ResearchPublication,
 } from "@/data/research";
 
 const researchDescription =
-	"Publications and teaching by Ethan Villalovoz across robot learning, human-robot interaction, and machine learning for code.";
+	"Research and publications by Yashasvi Sorapalli in robotics, robot perception, computer vision, and autonomous systems.";
 
 export const metadata: Metadata = {
 	title: "Research",
@@ -27,9 +26,8 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary",
-		title: "Research | Ethan Villalovoz",
+		title: "Research | Yashasvi Sorapalli",
 		description: researchDescription,
-		creator: "@ethanvillalovoz",
 	},
 };
 
@@ -58,7 +56,7 @@ const researchCollectionJsonLd = {
 				identifier: publication.identifier,
 				image: absoluteUrl(publication.image),
 				author: publication.authors.map((author) =>
-					author.isEthan
+					author.isYashasvi
 						? personReference
 						: {
 								"@type": "Person",
@@ -110,14 +108,20 @@ function PublicationRow({
 						{publication.title}
 					</a>
 				</h3>
+
 				<PublicationAuthors
 					authors={publication.authors}
 					className="research-authors"
 				/>
+
 				<p className="research-publication-meta">
 					{publication.venue}, {publication.date}
 				</p>
-				<nav className="research-resource-links" aria-label={`${publication.shortTitle} resources`}>
+
+				<nav
+					className="research-resource-links"
+					aria-label={`${publication.shortTitle} resources`}
+				>
 					{publication.resources.map((resource, resourceIndex) => (
 						<span key={resource.label} className="research-resource-item">
 							<a
@@ -128,82 +132,63 @@ function PublicationRow({
 							>
 								{resource.label}
 							</a>
+
 							{resourceIndex < publication.resources.length - 1 ? (
-								<span className="research-resource-separator" aria-hidden="true">
+								<span
+									className="research-resource-separator"
+									aria-hidden="true"
+								>
 									{" / "}
 								</span>
 							) : null}
 						</span>
 					))}
 				</nav>
-				<p className="research-publication-description">{publication.description}</p>
+
+				<p className="research-publication-description">
+					{publication.description}
+				</p>
 			</div>
 		</li>
 	);
 }
-
-const teachingGroups = Array.from(new Set(teachingExperiences.map((entry) => entry.institution))).map((institution) => ({
-	institution,
-	experiences: teachingExperiences.filter((entry) => entry.institution === institution),
-}));
 
 export default function ResearchPage() {
 	return (
 		<>
 			<script
 				type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(researchCollectionJsonLd) }}
-				/>
-				<main className="research-main">
-					<div className="research-container">
-						<header className="work-intro work-page-fade">
-							<h1>Research</h1>
-						</header>
+				dangerouslySetInnerHTML={{
+					__html: JSON.stringify(researchCollectionJsonLd),
+				}}
+			/>
 
-						<section aria-labelledby="publications-heading">
-							<h2 id="publications-heading" className="secondary-section-label">
-								Publications
-							</h2>
-							<ol className="research-publications">
-								{researchPublications.map((publication, index) => (
-									<PublicationRow
-										key={publication.title}
-										publication={publication}
-										index={index}
-									/>
-								))}
-							</ol>
-						</section>
+			<main className="research-main">
+				<div className="research-container">
+					<header className="work-intro work-page-fade">
+						<h1>Research</h1>
+					</header>
 
-						<section className="research-teaching" aria-labelledby="teaching-heading">
-							<h2 id="teaching-heading" className="secondary-section-label">
-								Teaching
-							</h2>
-							<div className="teaching-groups">
-								{teachingGroups.map(({ institution, experiences }) => (
-									<section className="teaching-institution" key={institution} aria-label={institution}>
-										<h3 className="teaching-institution-name">{institution}</h3>
-										<ol className="teaching-list">
-											{experiences.map((experience) => (
-												<li key={`${experience.course}-${experience.term}`} className="teaching-row">
-													<div className="teaching-role-heading">
-														<h4 className="teaching-role">{experience.role}</h4>
-														<p className="teaching-term">{experience.term}</p>
-													</div>
-													<p className="teaching-course">
-														{experience.href ? (
-															<a href={experience.href} target="_blank" rel="noopener noreferrer" className="portfolio-link">{experience.course}</a>
-														) : experience.course}
-													</p>
-												</li>
-											))}
-										</ol>
-									</section>
-								))}
-							</div>
-						</section>
-					</div>
-				</main>
+					<section aria-labelledby="publications-heading">
+						<h2
+							id="publications-heading"
+							className="secondary-section-label"
+						>
+							Publications
+						</h2>
+
+						<ol className="research-publications">
+							{researchPublications.map((publication, index) => (
+								<PublicationRow
+									key={publication.title}
+									publication={publication}
+									index={index}
+								/>
+							))}
+						</ol>
+					</section>
+				</div>
+			</main>
 		</>
 	);
 }

@@ -1,16 +1,14 @@
 export const site = {
-	name: "Ethan Villalovoz",
-	url: "https://ethanvillalovoz.com",
+	name: "Yashasvi Sorapalli",
+	url: "https://ysorapalli.com",
 	description:
-		"Ethan Villalovoz works on robot learning at Georgia Tech and most recently built enterprise AI agent systems at Microsoft, with research spanning robotics, AI agents, and human feedback.",
-	image: "/images/EthanVillalovozPic-optimized.jpg",
-	personId: "https://ethanvillalovoz.com/#ethan-villalovoz",
+		"Yashasvi Sorapalli is a robotics graduate student at Carnegie Mellon University interested in robotics software, perception, autonomy, and closed-loop intelligent robotic systems.",
+	// image: "/images/YashasviSorapalli-Pic.jpg",
+	personId: "https://ysorapalli.com/#yashasvi-sorapalli",
 	socialProfiles: [
-		"https://scholar.google.com/citations?user=CavKFp4AAAAJ&hl=en",
-		"https://github.com/ethanvillalovoz",
-		"https://www.linkedin.com/in/ethanvillalovoz/",
-		"https://x.com/ethanvillalovoz",
-		"https://www.youtube.com/@ethanvillalovoz",
+		"https://www.linkedin.com/in/yashasvi-s/",
+		"https://github.com/ysorapalli",
+		"https://scholar.google.com/citations?user=qdXeEYEAAAAJ&hl=en",
 	],
 } as const;
 

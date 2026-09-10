@@ -36,7 +36,6 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		title: `${promptSearchEssay.title} | ${site.name}`,
 		description: articleDescription,
-		creator: "@ethanvillalovoz",
 		images: [absoluteUrl(promptSearchEssay.image)],
 	},
 };
@@ -107,7 +106,7 @@ export default function PromptSearchEssayPage() {
 					<h1>{promptSearchEssay.title}</h1>
 					<p className="essay-deck">{promptSearchEssay.summary}</p>
 					<div className="essay-byline">
-						<span>Ethan Villalovoz</span>
+						<span>Yashasvi Sorapalli</span>
 						<time dateTime={promptSearchEssay.dateTime}>{promptSearchEssay.date}</time>
 					</div>
 				</header>

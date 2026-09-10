@@ -8,7 +8,6 @@ export default function Navbar() {
 	const pathname = usePathname();
 	const navItems = [
 		{ label: "Home", href: "/" },
-		{ label: "Writing", href: "/writing/" },
 		{ label: "Research", href: "/research/" },
 	];
 
@@ -16,7 +15,7 @@ export default function Navbar() {
 		<header className="secondary-header work-page-fade">
 			<div className="secondary-header-inner">
 				<Link href="/" className="secondary-brand portfolio-link">
-					Ethan Villalovoz
+					Yashasvi Sorapalli
 				</Link>
 
 				<div className="secondary-header-actions">
@@ -39,7 +38,7 @@ export default function Navbar() {
 							);
 						})}
 						<a
-							href="https://github.com/ethanvillalovoz"
+							href="https://github.com/ysorapalli"
 							target="_blank"
 							rel="noopener noreferrer"
 							className="secondary-nav-link portfolio-link"

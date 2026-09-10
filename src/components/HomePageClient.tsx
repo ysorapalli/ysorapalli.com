@@ -5,63 +5,52 @@ import { useEffect, useState, type ReactNode } from "react";
 import { FiMapPin } from "react-icons/fi";
 import PublicationAuthors from "@/components/PublicationAuthors";
 import ThemeToggle from "@/components/ThemeToggle";
-import { researchPublications, type ResearchPublication } from "@/data/research";
+import { researchPublications, selectedProjects, type ResearchPublication } from "@/data/research";
 
 const previousExperience = [
 	{
-		title: "Microsoft",
-		href: "https://www.microsoft.com/",
-		iconSrc: "/images/organizations/microsoft.ico",
-		role: "Software Engineer Intern",
-		date: "2026",
+		title: "Carnegie Mellon University",
+		href: "https://www.cmu.edu/",
+		iconSrc: "/images/organizations/cmu.svg",
+		role: "M.S. in Robotic Systems Development",
+		date: "2026–2028",
 	},
 	{
-		title: "Washington State University",
-		href: "https://wsu.edu/",
-		iconSrc: "/images/organizations/washington-state.svg",
-		role: "Undergraduate Research Assistant",
+		title: "Visa",
+		href: "https://www.visa.com/",
+		iconSrc: "/images/organizations/visa.svg",
+		role: "Software Engineer",
+		date: "2025–2026",
+	},
+	{
+		title: "BT Group",
+		href: "https://www.bt.com/",
+		iconSrc: "/images/organizations/bt.svg",
+		role: "Software Engineering Intern & Full-Time Professional",
 		date: "2024–2025",
 	},
 	{
-		title: "CMU Robotics Institute",
-		href: "https://www.ri.cmu.edu/",
-		iconSrc: "/images/organizations/cmu-ri.svg",
-		role: "Summer Scholar",
-		date: "2024",
-	},
-	{
-		title: "Google",
-		href: "https://about.google/",
-		iconSrc: "/images/organizations/google.png",
-		role: "STEP Intern",
-		date: "2023",
-	},
-	{
-		title: "Oregon State University",
-		href: "https://oregonstate.edu/",
-		iconSrc: "/images/organizations/oregon-state.png",
-		role: "NSF REU Fellow",
-		date: "2022",
+		title: "R.V. College of Engineering",
+		href: "https://www.rvce.edu.in/",
+		iconSrc: "/images/organizations/rvce.svg",
+		role: "B.E. in Computer Science",
+		date: "2020–2024",
 	},
 ];
-
 const profileLinks = [
-	{ label: "Resume", href: "/data/EthanVillalovoz-Resume.pdf" },
-	{ label: "CV", href: "/data/EthanVillalovoz-CV.pdf" },
-	{ label: "GitHub", href: "https://github.com/ethanvillalovoz" },
+	{ label: "Resume", href: "/data/YashasviSorapalli-Resume.pdf" },
+	{ label: "GitHub", href: "https://github.com/ysorapalli" },
 	{
 		label: "Scholar",
-		href: "https://scholar.google.com/citations?user=CavKFp4AAAAJ&hl=en",
+		href: "https://scholar.google.com/citations?user=qdXeEYEAAAAJ&hl=en",
 	},
 	{
 		label: "LinkedIn",
-		href: "https://www.linkedin.com/in/ethanvillalovoz/",
+		href: "https://www.linkedin.com/in/yashasvi-s/",
 	},
-	{ label: "X", href: "https://x.com/ethanvillalovoz" },
-	{ label: "YouTube", href: "https://www.youtube.com/@ethanvillalovoz" },
 ];
 
-const contactEmail = "ethan.villalovoz@gmail.com";
+const contactEmail = "ysorapalli@gmail.com";
 
 function TextLink({
 	href,
@@ -234,16 +223,16 @@ export default function HomePageClient() {
 				<header className="portfolio-intro">
 					<div className="portfolio-identity">
 						<div className="portfolio-identity-copy">
-							<h1 className="portfolio-h1">Ethan Villalovoz</h1>
+							<h1 className="portfolio-h1">Yashasvi Sorapalli</h1>
 							<p className="portfolio-location">
 								<FiMapPin aria-hidden="true" />
-								<span>Sacramento, California, United States</span>
+								<span>Pittsburgh, Pennsylvania, United States</span>
 							</p>
 						</div>
 
 						<Image
-							src="/images/EthanVillalovozPic-optimized.jpg"
-							alt="Portrait of Ethan Villalovoz"
+							src="/images/YashasviSorapalliPic-optimized.jpg"
+							alt="Portrait of Yashasvi Sorapalli"
 							width={88}
 							height={88}
 							quality={90}
@@ -254,23 +243,17 @@ export default function HomePageClient() {
 
 					<div className="portfolio-fade portfolio-fade-two">
 						<p className="portfolio-p">
-							I&apos;m an M.S. student in Computer Science at{" "}
+							I&apos;m a graduate student in the{" "}
 							<OrganizationLink
-								href="https://www.gatech.edu/"
-								iconSrc="/images/organizations/gatech.ico"
+								href="https://www.cmu.edu/"
+								iconSrc="/images/organizations/cmu.svg"
 							>
-								Georgia Tech
-							</OrganizationLink>
-							. I&apos;m interested in how robots can understand the physical world and the people they interact with. Previously, I built and evaluated enterprise AI agent systems at{" "}
-							<OrganizationLink
-								href="https://www.microsoft.com/"
-								iconSrc="/images/organizations/microsoft.ico"
-							>
-								Microsoft
-							</OrganizationLink>
-							.
+								Master of Science in Robotic Systems Development
+							</OrganizationLink>{" "}
+							program at Carnegie Mellon University. I&apos;m interested in building
+							robotic systems that can perceive, understand, and act in the physical
+							world, with a focus on robotics software, perception, and autonomy.
 						</p>
-
 						<p className="portfolio-p portfolio-contact-copy">
 							You can reach me at{" "}
 							<span className="portfolio-copy-email">
@@ -295,7 +278,7 @@ export default function HomePageClient() {
 							</span>
 						</p>
 
-						<nav className="portfolio-profile-links" aria-label="Ethan's profiles and contact links">
+						<nav className="portfolio-profile-links" aria-label="Yashasvi's profiles and contact links">
 							{profileLinks.map((link) => (
 								<span key={link.label} className="portfolio-profile-link-item">
 									<TextLink href={link.href}>{link.label}</TextLink>
@@ -307,7 +290,7 @@ export default function HomePageClient() {
 
 				<section className="portfolio-section" aria-labelledby="previously-heading">
 					<h2 id="previously-heading" className="portfolio-section-label portfolio-fade portfolio-fade-three">
-						Previously
+						Experience & Education
 					</h2>
 					<div className="portfolio-experience-list">
 						{previousExperience.map((item, index) => (
@@ -325,10 +308,10 @@ export default function HomePageClient() {
 						className="portfolio-section-label portfolio-fade"
 						style={{ animationDelay: "300ms" }}
 					>
-						Selected publications
+						Selected projects
 					</h2>
 					<div className="portfolio-work-list">
-						{researchPublications.map((publication, index) => (
+						{selectedProjects.map((publication, index) => (
 							<SelectedPublicationRow
 								key={publication.title}
 								publication={publication}

@@ -96,7 +96,6 @@ export const metadata: Metadata = {
     card: "summary",
     title: site.name,
     description: site.description,
-    creator: "@ethanvillalovoz",
   },
 };
 
@@ -118,7 +117,7 @@ export default function RootLayout({
               "@id": `${site.url}/#website`,
               name: site.name,
               url: `${site.url}/`,
-              alternateName: ["ethanvillalovoz.com", "Ethan Villalovoz"],
+              alternateName: ["ysorapalli.com", "Yashasvi Sorapalli"],
               author: personReference,
               inLanguage: "en-US",
             }),

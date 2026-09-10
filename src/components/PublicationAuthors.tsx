@@ -11,7 +11,7 @@ export default function PublicationAuthors({
 		<p className={className}>
 			{authors.map((author, index) => (
 				<span key={author.name}>
-					{author.isEthan ? (
+					{author.isYashasvi ? (
 						<strong>
 							{author.href ? (
 								<a
