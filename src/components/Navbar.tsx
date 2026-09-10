@@ -2,13 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Navbar() {
 	const pathname = usePathname();
+
 	const navItems = [
 		{ label: "Home", href: "/" },
-		{ label: "Research", href: "/research/" },
+		{ label: "Background", href: "/background/" },
 	];
 
 	return (
@@ -19,7 +21,10 @@ export default function Navbar() {
 				</Link>
 
 				<div className="secondary-header-actions">
-					<nav className="secondary-nav" aria-label="Primary navigation">
+					<nav
+						className="secondary-nav"
+						aria-label="Primary navigation"
+					>
 						{navItems.map((item) => {
 							const isCurrent =
 								item.href === "/"
@@ -31,12 +36,15 @@ export default function Navbar() {
 									key={item.href}
 									href={item.href}
 									className="secondary-nav-link portfolio-link"
-									aria-current={isCurrent ? "page" : undefined}
+									aria-current={
+										isCurrent ? "page" : undefined
+									}
 								>
 									{item.label}
 								</Link>
 							);
 						})}
+
 						<a
 							href="https://github.com/ysorapalli"
 							target="_blank"

@@ -199,8 +199,28 @@ button {
 }
 
 .portfolio-profile-link-item {
-  display: block;
-  white-space: nowrap;
+	display: block;
+	white-space: nowrap;
+}
+
+.portfolio-profile-link-item .portfolio-link {
+	border: 1px solid rgb(var(--foreground) / 0.18);
+	border-radius: 4px;
+	display: inline-block;
+	padding: 5px 10px;
+	text-decoration: none;
+	transition:
+		background-color var(--motion-fast) var(--ease-out),
+		border-color var(--motion-fast) var(--ease-out);
+}
+
+.portfolio-profile-link-item .portfolio-link:hover {
+	background: rgb(var(--foreground) / 0.06);
+	border-color: rgb(var(--foreground) / 0.35);
+}
+
+.portfolio-profile-link-item .portfolio-link::after {
+	display: none;
 }
 
 .portfolio-section + .portfolio-section {
@@ -222,6 +242,16 @@ button {
 .portfolio-experience-list {
   display: grid;
   gap: 18px;
+}
+
+.portfolio-skills-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+}
+
+.portfolio-skill {
+	white-space: nowrap;
 }
 
 .portfolio-experience-row {
